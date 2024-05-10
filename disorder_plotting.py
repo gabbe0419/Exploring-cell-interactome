@@ -274,23 +274,8 @@ class DisorderAnalysis:
             start += widths
 
             # Adds lines at each other 10% interval
-            # I do not know why y positions of the bar are like that. It is the only thing that worked
-            # I have no earthly idea what's going on here
             split += distribution_df.loc[(i * 2) : (i * 2) + 1, :].sum()
 
-            # for j, (bar, x) in enumerate(zip(bars, split)):
-            #     height = bar.get_height()
-            #     y = bar.get_y() + 2 * height
-            #     ax.axvline(
-            #         x,
-            #         y / len(protein_keys),
-            #         (y - height) / len(protein_keys),
-            #         color="black",
-            #         zorder=3,
-            #         linestyle="dashed",
-            #     )
-
-            # Adds lines at each other 10% interval
             for bar, x in zip(bars, split):
                 height = bar.get_height()
                 y_bottom = bar.get_y()  # Bottom y-coordinate of the bar
