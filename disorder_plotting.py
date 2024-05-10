@@ -403,17 +403,6 @@ class DisorderAnalysis:
             fontsize="medium",)
 
         return pyplot.show()
-    
-    # Plots Density curve
-    def plot_density(self, protein_keys):
-        
-        data = self.disorder_ratio_dict
-        x_limit = [0, 1]
-
-        for i, key in enumerate(protein_keys):
-            ax = data[key].plot(kind="density", xlim=x_limit, label=protein_keys[i])
-        ax.grid()
-        ax.legend()
 
     # Plots boxplot
     def plot_box(self, protein_keys, labels, fig_size = (9, 6)):
