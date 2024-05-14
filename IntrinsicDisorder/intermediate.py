@@ -9,12 +9,8 @@ import os
 class Intermediate:
     def __init__(
         self,
-        input=[
-            "Data/BioPlex_293T_Network_10K_Dec_2019.tsv",
-            "Data/BioPlex_HCT116_Network_5.5K_Dec_2019.tsv",
-            "Data/Huttlin_BioPlex3_Table_S1.xlsb",
-            "Data/uniprotkb_AND_reviewed_true_AND_model_o_2024_02_28.fasta",
-        ], write = False
+        input,
+        write = False
     ):
         self.data_293T = pandas.read_csv(
             input[0], sep="\t", header=0
