@@ -1,6 +1,6 @@
 import pandas
 import numpy
-from Bio import SeqIO
+from Bio import SeqIO # type: ignore
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
 import os
