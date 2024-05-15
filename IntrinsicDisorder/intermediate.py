@@ -7,11 +7,7 @@ import os
 
 
 class Intermediate:
-    def __init__(
-        self,
-        input,
-        write = False
-    ):
+    def __init__(self, input, write=False):
         self.data_293T = pandas.read_csv(
             input[0], sep="\t", header=0
         )  # Requires correct file path for bioplex3 293T-newtork
@@ -38,7 +34,9 @@ class Intermediate:
 
         self.unique_293T, self.unique_HCT116, self.shared = self.filter_interactions()
 
-        self.proteins_293T, self.proteins_HCT116, self.proteins_shared = self.unique_proteins()
+        self.proteins_293T, self.proteins_HCT116, self.proteins_shared = (
+            self.unique_proteins()
+        )
 
         self.sequence_df = self.read_fasta(input[3])
 
@@ -50,10 +48,7 @@ class Intermediate:
             self.unique_HCT116.to_csv(
                 "Data/Interactions/Unique_interactions_HCT116.csv", index=False
             )
-            self.shared.to_csv(
-                "Data/Interactions/Shared_interactions.csv", index=False
-            )
-
+            self.shared.to_csv("Data/Interactions/Shared_interactions.csv", index=False)
 
     def filter_interactions(self):
         data_293T = self.data_293T
@@ -184,7 +179,9 @@ class Intermediate:
         allppi_allcells_inclusive = uniqueppi_allcells_inclusive.intersection(shared)
 
         # Proteins only appearing in unique interactions of botch cell lines
-        uniqueppi_allcells_exclusive = uniqueppi_allcells_inclusive - allppi_allcells_inclusive
+        uniqueppi_allcells_exclusive = (
+            uniqueppi_allcells_inclusive - allppi_allcells_inclusive
+        )
 
         # Proteins only appearing in shared interactions
         sharedppi_allcells_exclusive = shared - allppi_allcells_inclusive
@@ -224,5 +221,3 @@ class Intermediate:
             filt = all_proteins.isin(prot_list)
             proteins = all_proteins.loc[filt]
             proteins.to_csv(f"Data/Protein_lists/{lists[i]}.csv")
-
-

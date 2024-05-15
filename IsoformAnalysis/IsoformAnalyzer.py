@@ -12,12 +12,13 @@ def get_dataset_count(interaction_df, lib_df):
     gene_lib_match = gene_lib_matcher( unique_isoforms, lib_df)
     
     lib_match = addition(iso_lib_match, can_lib_match, gene_lib_match, 'isoform')
-    undefined_sorted = subtraction(unique_isoforms, lib_match, 'isoform', 'isoform')
+    undefined_sorted = sort_undefined(unique_isoforms, lib_match, 'isoform', 'isoform')
     index = addition(lib_match, undefined_sorted, None, 'isoform')
+    original_index = index.copy()
     
     proteins = isoform_count(index)
     
-    return proteins, index
+    return proteins, original_index
     
 def isoform_distribution (proteins):
     df = proteins
@@ -90,7 +91,6 @@ def iso_lib_matcher (dataset_df, lib_df, check_duplicates = False):
     
 def can_lib_matcher(dataset_df, lib_df, check_duplicates = False):
 
-
     dataset_column_1 = "isoform"
     dataset_column_2 = "gene_name_x"
     lib_column_4 = "isoform_of"
@@ -127,7 +127,7 @@ def addition(dataset_1, dataset_2, dataset_3, column_drop_duplicates, check_dupl
         
     return merged_df
 
-def subtraction (add_df, subtract_df, add_column, subtract_column):
+def sort_undefined (add_df, subtract_df, add_column, subtract_column):
     sum = add_df[~add_df[add_column].isin(subtract_df[subtract_column])]
     
     data_column_1 = "isoform"
@@ -138,8 +138,9 @@ def subtraction (add_df, subtract_df, add_column, subtract_column):
     sum_sorted.columns = ["canonical_protein", data_column_1, data_column_2]
     
     
-    return sum_sorted.sort()    
+    return sum_sorted 
 
+    
 def isoform_count(dataset, print_total = False):
     isoform_dict = {}
 
@@ -153,7 +154,11 @@ def isoform_count(dataset, print_total = False):
 
     for data_column_1, data_column_2_values in isoform_dict.items():
         for i, data_column_2_value in enumerate(data_column_2_values, start=1):
-            dataset.loc[dataset['canonical_protein'] == data_column_1, f'isoform_{i}'] = data_column_2_value
+            col_name = f'isoform_{i}'
+            # Ensure the column exists and is of type 'object'
+            if col_name not in dataset.columns:
+                dataset[col_name] = pd.Series(dtype='object')
+            dataset.loc[dataset['canonical_protein'] == data_column_1, col_name] = data_column_2_value
 
     dataset.drop_duplicates(subset=['canonical_protein'], inplace=True)
     dataset_count = dataset[['canonical_protein'] + [col for col in dataset.columns if col.startswith('isoform_')]].copy()
@@ -165,6 +170,7 @@ def isoform_count(dataset, print_total = False):
         print("Total Isoform Count:", total_isoform_count)
 
     return dataset_count
+
 
 def check_duplicates (df):
         duplicates_exist = df.duplicated(subset=["isoform"]).any()
