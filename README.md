@@ -9,7 +9,7 @@
         
     2. Run "disorder_plotting_output.ipynb" to generate plots
 
-## Data used (And sepcific file path that code is built upon)
+## Data used (And specific file path that code is built upon)
     Data\BioPlex_293T_Network_10K_Dec_2019.tsv
     Data\BioPlex_HCT116_Network_5.5K_Dec_2019.tsv
     Data\Huttlin_BioPlex3_Table_S1.xlsb
