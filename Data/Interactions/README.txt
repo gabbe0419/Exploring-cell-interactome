@@ -4,4 +4,4 @@ Interactions from Bioplex 3.0 filtered to produce seperate csv files for the thr
     - Unique interactions of cell line HCT-116
     - Shared interactions ocurring in both cell lines
 
-Output of 'Intermediate(write = True)'
+Output of 'Intermediate(*input, write = True)'

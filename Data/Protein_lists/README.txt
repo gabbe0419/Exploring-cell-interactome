@@ -1,6 +1,6 @@
 Lists of proteins in different interaction categories.
 Made for testing and comparison of intrinsic disorder. 
-Output of 'Intermediate.protein_grouping'
+Output of 'Intermediate.protein_grouping' executed in "disorder_plotting_output.ipynb"
 
 'proteins_uniqueppi' = All proteins appearing in unique interactions
 'proteins_sharedppi' = All proteins appearing in shared interactions
