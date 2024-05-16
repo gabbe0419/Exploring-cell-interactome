@@ -1,9 +1,6 @@
 import pandas
 import numpy
-from Bio import SeqIO # type: ignore
-import subprocess
-from concurrent.futures import ThreadPoolExecutor
-import os
+from Bio import SeqIO  # type: ignore
 
 
 class Intermediate:

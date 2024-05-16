@@ -1,7 +1,4 @@
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-
 
 def get_uniqueppi_isoforms (interaction_df, proteins_main, proteins_compare, index_main):
 
