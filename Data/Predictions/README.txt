@@ -1,0 +1,2 @@
+Per residue intrinsic disorder prediction for all proteins in interaction data generated using iupred 3 (downloaded: 2024-03-18)
+Output in hdf5 format from 'disorder_prediction.ipynb' !Uncomment last code-cell
